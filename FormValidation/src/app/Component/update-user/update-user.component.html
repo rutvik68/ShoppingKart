@@ -1,0 +1,362 @@
+<mat-grid-list cols="2" rowHeight="1:1">
+    <mat-grid-tile>
+      <div *ngIf="gender === 'male'">
+        <img src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png" alt="">
+      </div>
+      <div *ngIf="gender === 'female'">
+        <img src="https://cdn1.iconfinder.com/data/icons/avatars-1-5/136/87-512.png" alt="">
+      </div>
+      <div *ngIf="gender === 'other'">
+        <img src="https://quicklaunch.io/wp-content/uploads/2019/10/user-registration.png" alt="">
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+
+
+<div class="container">
+    <h1 style="text-align: center;color: #195CDD; " class="md-display-1">Shopping Kart</h1>
+    <h3 style="text-align: center; margin-top: 20px;color:rgba(114, 115, 115, 0.95);font-size: 30px;font-weight: 300;" >Update Profile</h3>
+
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="formData">
+
+    <form [formGroup]="formData" class="normal-form">
+        <ng-template matStepLabel>General Info</ng-template>
+
+        <mat-grid-list cols="2" rowHeight="12:3">
+            <mat-grid-tile>
+                <div class="full-width-field">
+                    <input type="hidden" formControlName="$key">
+                    <mat-form-field appearance="standard" style="padding: 20px;width: 70%;margin-bottom: 6px;" >
+                        <mat-label style="color: #195CDD;">First Name</mat-label>
+                        <input formControlName="FirstName" matInput placeholder="Enter First Name" value="{{FirstName}">                
+                      </mat-form-field>
+                </div>
+            </mat-grid-tile> 
+
+            <mat-grid-tile>
+                <div class="full-width-field" style="width: 100%;">
+                    <mat-form-field appearance="standard" style="padding: 20px;width: 70%;margin-bottom: 6px; ">
+                        <mat-label align="left" style="color: #195CDD;">Last Name</mat-label>
+                        <input formControlName="LastName" matInput placeholder="Enter Last Name">
+                        <mat-error *ngIf="service.form.controls['LastName'].errors?.['required']">This field is Mandatory</mat-error> 
+                        <mat-error *ngIf="service.form.controls['LastName'].errors?.['pattern']">Enter valied Name</mat-error>                        
+                      </mat-form-field>
+                </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="2" class="full-width-field">
+                <div class="w-100">
+                    <mat-form-field appearance="standard" style="padding-left:20px ;width: 85%;margin-bottom: 6px;">
+                        <mat-label style="color: #195CDD;">Email</mat-label>
+                        <input formControlName="email" matInput placeholder="pat@example.com">
+                        <mat-icon matSuffix> email</mat-icon>
+                        <mat-error *ngIf="service.form.controls['email'].errors?.['required']">This field is Mandatory</mat-error>
+                        <mat-error *ngIf="service.form.controls['email'].errors?.['email']">Enter Valid Email</mat-error>
+                      </mat-form-field>
+                </div> 
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <div class="full-width-field">
+                    <mat-form-field appearance="standard" style="padding: 20px;margin-bottom: 6px;">
+                        <!-- <mat-label align="left" style="color: #195CDD;">Phone Number</mat-label> -->
+                        <input  formControlName="mobile" matInput placeholder="1234567890">
+                        <mat-icon matSuffix>phone</mat-icon>
+                        <mat-error *ngIf="service.form.controls['mobile'].errors?.['required']">This field is Mandatory</mat-error>
+                        <mat-error *ngIf="service.form.controls['mobile'].errors?.['pattern']">Only Enter Number</mat-error>
+                        <mat-error *ngIf="service.form.controls['mobile'].errors?.['minlength']">Enter Valid Number</mat-error>
+                        <mat-error *ngIf="service.form.controls['mobile'].errors?.['maxlength']">Enter only 10 Digit</mat-error>                        
+                      </mat-form-field>
+                      <!-- <input type="text" ng2TelInput > -->
+                </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <div class="full-width-field">
+                    <mat-form-field appearance="standard" style="padding: 20px;">
+                        <mat-label style="color: #195CDD;">Date Of Brith</mat-label>
+                        <input formControlName="dob" matInput [matDatepicker]="picker" (dateInput)="addEvent($event)" [max]="maxDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>                        
+                      </mat-form-field>
+                </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="2" class="full-width-field">
+                <div class="w-100">
+                    <mat-label style="color: #195CDD;padding: 20px;">Gender</mat-label>
+                    <mat-radio-group (change)="onChange($event)"formControlName="gender" style="padding:10px;" >
+                        <mat-radio-button value="male" style="padding:10px;">Male</mat-radio-button>
+                        <mat-radio-button value="female" style="padding:10px;">Female</mat-radio-button>
+                        <mat-radio-button value="other" style="padding:10px;">Other</mat-radio-button>
+                      </mat-radio-group>
+                </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="2" class="full-width-field">
+                <div class="w-100">
+                    <mat-form-field appearance="standard" style="padding: 20px;margin-bottom: 6px;">
+                        <mat-label style="color: #195CDD;">Enter your password</mat-label>
+                        <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="service.form.controls['password'].errors?.['required']">This field is Mandatory</mat-error>
+                        <mat-error *ngIf="service.form.controls['password'].errors?.['pattern']">Enter Valied Patten</mat-error>
+                    </mat-form-field>
+                </div>    
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="2" class="full-width-field">
+                <div class="w-100" style="padding: 20px">
+                <button mat-button mat-raised-button matStepperNext color="primary" [disabled]="service.form.invalid" >Next</button>
+            </div>
+                <!-- <button style="width: 200px;" mat-raised-button type="submit" color="primary" [disabled]="service.form.invalid" (click)="click()" >Submit</button> -->
+            </mat-grid-tile>
+
+                
+            
+            
+        </mat-grid-list>
+        
+
+
+        
+    </form>
+</mat-step>
+
+<mat-step [stepControl]="form">
+    <form [formGroup]="form">
+      <ng-template matStepLabel>Address</ng-template>
+
+      <mat-grid-list cols="2" rowHeight="10:3">
+
+        <mat-grid-tile colspan="2" class="full-width-field">
+            <div class="w-100">
+                <mat-form-field appearance="standard" style="padding-left:20px ;width: 85%;margin-bottom: 6px;">
+                  
+                    <mat-label style="color: #195CDD;">Address</mat-label>
+                    <textarea matInput [formControl]="address" name="address" [errorStateMatcher]="matcher" placeholder="enter address"></textarea>
+                
+                    <mat-icon matSuffix>add_location</mat-icon>
+                    <mat-error *ngIf="address.hasError('required')"
+          >This field is Mandatory</mat-error
+        >  
+                    <!-- <mat-error *ngIf="service.address.controls['address1'].errors?.['required']">This field is Mandatory</mat-error> -->
+                  </mat-form-field>
+            </div> 
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div class="full-width-field">
+                <mat-form-field appearance="standard" style="padding: 20px;margin-bottom: 6px;">
+                    <mat-label style="color: #195CDD;">Country</mat-label>
+        <mat-select 
+          [formControl]="country"
+          name="country"
+          [errorStateMatcher]="matcher"
+        >
+          <mat-option *ngFor="let country of countries" [value]="country.shortName">
+            {{ country.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="country.hasError('required')"
+          >Please select a country.</mat-error
+        >  
+    <mat-error *ngIf="service.address.controls['country'].errors?.['required']">This field is Mandatory</mat-error>                       -->
+                  </mat-form-field>
+                  
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div class="full-width-field">
+                <mat-form-field appearance="standard" style="padding: 20px;">
+                    <mat-label>State</mat-label>
+        <mat-select
+          [formControl]="state"
+          name="state"
+          [errorStateMatcher]="matcher"
+          
+        >
+          <mat-option *ngFor="let state of states" [value]="state">
+            {{ state }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="state.hasError('required')"
+          >Please select a state.</mat-error
+        >                        
+                  </mat-form-field>
+            </div>
+        </mat-grid-tile>
+
+
+        <mat-grid-tile colspan="2" class="full-width-field">
+            <div class="w-100">
+                <mat-form-field appearance="standard" style="padding: 20px;margin-bottom: 6px;">
+                    <mat-label>City</mat-label>
+        <mat-select [formControl]="city" name="city" [errorStateMatcher]="matcher">
+          <mat-option *ngFor="let city of cities" [value]="city">
+            {{ city }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="city.hasError('required')"
+          >Please select a city.</mat-error
+        >
+                </mat-form-field>
+            </div>    
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2" class="full-width-field">
+            <div class="w-100">
+                <mat-form-field appearance="standard" style="padding: 20px;margin-bottom: 6px;">
+                    <mat-label style="color: #195CDD;">pincode</mat-label>
+                    <input [formControl]="pincode" name="pincode" [errorStateMatcher]="matcher" matInput placeholder="Enter your pincode">
+                    
+                    <!-- <mat-error *ngIf="service.address.controls['pincode'].errors?.['required']">This field is Mandatory</mat-error> -->
+                    <!-- <mat-error *ngIf="service.address.controls['pincode'].errors?.['pattern']">Enter only number</mat-error> -->
+                    <mat-error *ngIf="pincode.hasError('required')"
+                    >This field is Mandatory</mat-error
+                  >
+                  <mat-error *ngIf="pincode.hasError('pattern')"
+                  >enter vaild pincode</mat-error
+                >       
+                </mat-form-field>
+            </div>    
+        </mat-grid-tile>
+
+        <mat-grid-tile class="full-width-field">
+            <div class="w-100" style="padding: 20px">
+            <button mat-button mat-raised-button matStepperPrevious color="primary">Back</button>
+        </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile class="full-width-field">
+            <div class="w-100" style="padding: 20px">
+            <button mat-button mat-raised-button matStepperNext color="primary" [disabled]="form.invalid" >Next</button>
+        </div>
+            <!-- <button style="width: 200px;" mat-raised-button type="submit" color="primary" [disabled]="service.form.invalid" (click)="click()" >Submit</button> -->
+        </mat-grid-tile>
+
+      </mat-grid-list>
+
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+  
+    <mat-grid-list cols="2" rowHeight="14:2">
+        <mat-list>
+        <mat-grid-tile>
+            <div class="full-width-field">
+                <mat-list-item> <strong>First Name:&nbsp;&nbsp;</strong> {{ this.service.form.value.FirstName }}</mat-list-item>
+                <!-- <p></p> -->
+            </div>
+        </mat-grid-tile> 
+
+        <mat-grid-tile>
+            <div class="full-width-field" style="width: 100%;">
+                <mat-list-item> <strong>Last Name:&nbsp;&nbsp;</strong> {{ this.service.form.value.LastName }}</mat-list-item>
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2" class="full-width-field">
+            <div class="w-100">
+              <mat-list-item> <strong>Email:&nbsp;&nbsp;</strong> {{ this.service.form.value.email }}</mat-list-item>
+            </div> 
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div class="full-width-field">
+              <mat-list-item> <strong>Phone:&nbsp;&nbsp;</strong> {{ this.service.form.value.mobile }}</mat-list-item>
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div class="full-width-field">
+              <mat-list-item> <strong>DOB:&nbsp;&nbsp;</strong> {{ this.date }}</mat-list-item>
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2" class="full-width-field">
+            <div class="w-100">
+              <mat-list-item> <strong>Gender:&nbsp;&nbsp;</strong> {{ this.service.form.value.gender }}</mat-list-item>
+            </div>
+        </mat-grid-tile>
+
+
+        <mat-grid-tile colspan="2" class="full-width-field">
+            <div class="w-100">
+              <mat-list-item> <strong>Address:&nbsp;&nbsp;</strong> {{ this.form.value.address }}</mat-list-item>
+            </div> 
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div class="full-width-field">
+              <mat-list-item> <strong>Country:&nbsp;&nbsp;</strong> {{ this.form.value.country }}</mat-list-item>
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div class="full-width-field">
+              <mat-list-item> <strong>State:&nbsp;&nbsp;</strong> {{ this.form.value.state }}</mat-list-item>
+            </div>
+        </mat-grid-tile>
+
+
+        <mat-grid-tile colspan="2" class="full-width-field">
+            <div class="w-100">
+              <mat-list-item> <strong>City:&nbsp;&nbsp;</strong> {{ this.form.value.city }}</mat-list-item>
+            </div>    
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2" class="full-width-field">
+            <div class="w-100">
+              <mat-list-item> <strong>Pincode:&nbsp;&nbsp;</strong> {{ this.form.value.pincode }}</mat-list-item>
+            </div>    
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2" class="full-width-field">
+            <div class="w-100" style="padding: 20px">
+            <button mat-button mat-raised-button matStepperPrevious color="primary">Back</button>
+        </div>
+
+        <div class="w-100" style="padding: 20px">
+          <button mat-button mat-raised-button (click)="stepper.reset()" color="primary">Reset</button>
+      </div>
+
+      <div class="w-100" style="padding: 20px">
+        <button mat-button mat-raised-button (click)="register()" color="primary">Submit</button>
+    </div>
+
+        </mat-grid-tile>
+
+        
+
+        
+    </mat-list>
+      </mat-grid-list>
+  
+    <div>
+      <!-- <button mat-button matStepperPrevious>Back</button> -->
+      <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+      <!-- <button mat-button (click)="submit()">Submit</button> -->
+    </div>
+  </mat-step>
+
+</mat-horizontal-stepper>
+
+<div class="w-100" align="right" style="padding: 20px;">
+    <a routerLink="/login">Login</a>
+</div>
+    
+</div>
+
+
+  </mat-grid-tile>
+
+
+</mat-grid-list>

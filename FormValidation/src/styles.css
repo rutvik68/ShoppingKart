@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~ngx-toastr/toastr.css';
+/* @import "tailwindcss/base"; */
+/* @import "tailwindcss/components"; */
+/* @import "tailwindcss/utilities"; */
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color:#1A1A1D;
+    overflow-x: hidden;
+    /* #F8E5E5 #E1F2F7 #646C79 #11ABC1*/
+    /* https://thumbs.dreamstime.com/b/online-registration-sign-up-concept-flat-vector-illustration-young-male-cartoon-character-sitting-next-to-huge-smartphone-216011548.jpg */
+
+ }
+
+

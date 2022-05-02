@@ -1,0 +1,54 @@
+
+<mat-grid-list cols="2" rowHeight="1:1">
+    <mat-grid-tile>
+      <div>
+        <img src="https://quicklaunch.io/wp-content/uploads/2019/10/user-registration.png" alt="">
+      </div>
+    </mat-grid-tile>
+<mat-grid-tile>
+
+
+<div class="container">
+    <h1 style="text-align: center;color: #195CDD; " class="md-display-1">Shopping Kart</h1>
+    <h3 style="text-align: center; margin-top: 20px;color:rgba(114, 115, 115, 0.95);font-size: 30px;font-weight: 300;" >Delete Product</h3>
+
+
+    <form [formGroup]="service.RemoveProduct" class="normal-form">
+
+        <mat-grid-list cols="2" rowHeight="12:3">
+            <mat-grid-tile colspan="2" class="full-width-field">
+                <div class="w-100">
+                    <input type="hidden" formControlName="$key">
+                    <mat-form-field appearance="standard" style="padding: 20px;width: 70%;" >
+                        <mat-label style="color: #195CDD;">Product id</mat-label>
+                        <input formControlName="id" matInput placeholder="Enter Product id">
+                        <mat-error *ngIf="service.RemoveProduct.controls['id'].errors?.['required']">This field is Mandatory</mat-error>                    
+                      </mat-form-field>
+                </div>
+            </mat-grid-tile> 
+
+            <mat-grid-tile colspan="2" class="full-width-field">
+                <button style="width: 200px;" mat-raised-button type="submit" color="primary" [disabled]="service.RemoveProduct.invalid" (click)="onSubmit()" >Delete Product </button>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="2" class="full-width-field">
+                <div class="w-100" align="right" style="padding: 20px;">
+                    <a routerLink="/">Add Product</a>
+                    <a style="margin-left: 15px;" routerLink="/update">Update Product</a>
+                </div>
+            </mat-grid-tile>
+            
+        </mat-grid-list>
+        
+
+
+        
+    </form>
+    
+</div>
+
+
+  </mat-grid-tile>
+
+
+</mat-grid-list>

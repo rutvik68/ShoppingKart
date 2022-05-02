@@ -1,0 +1,22 @@
+.container{
+   background: #fff;
+   height: 370px;
+   width:450px;
+   border-radius: 25px;
+   box-shadow: 5px 4px 4px 3px rgba(17, 16, 16, 0.3);
+}
+
+
+.full-width-field {
+   width: 100%;
+}
+
+.p1{
+   width: 100%; 
+   display: flex; 
+   align-items: flex-start
+}
+
+.w-100{
+   width: 100% !important;
+}

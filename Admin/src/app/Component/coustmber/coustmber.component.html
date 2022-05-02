@@ -1,0 +1,75 @@
+<div layout="row" style="margin-top:10px ;">
+    <div class="container-fluid">
+        <div class="card-table">
+            <div  class="cart-producte" style="display:block;">
+                <p style="display:inline-block;width: fit-content;">Enter Customer NO</p>
+                <form [formGroup]="formData" class="normal-form">
+                    <input  style="display:inline-block;width: 240px;" formControlName="id" matInput placeholder="Enter Customer id">
+                    <button style="display:inline-block" mat-button mat-raised-button color="primary">Go</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+                
+
+
+
+            
+<div layout="row" style="margin-top:10px ;" *ngIf="productList.length != 0">
+    <div class="container-fluid">
+        <div class="card-table">
+            <div  class="cart-product">
+                <table mat-table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>Order id</th>
+                            <th>Coustemer id</th>
+                            <th>status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of productList; let i =index">
+                            <td>{{i+1}}</td>
+                            <td>{{item._id}}</td>
+                            <td>{{item.id}} </td>
+                            <th style="width: 12%;">
+                                <mat-form-field appearance="outline" style="display: inline-flex;">
+                                    <mat-select (selectionChange)="changestatus($event.value)" [(value)]="item.status">
+                                      <mat-option *ngFor="let status of stutas" [value]="status">
+                                        {{status}}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                            </th>
+                            <td style="width: 12%;">
+                                <button mat-raised-button color="primary" (click)="onChangestatus(item._id)">Done</button> 
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <td colspan="4"></td>
+                            <td><button routerLink="/"class="btn btn-primary">Add Product</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-container *ngIf="productList.length == 0">
+    <div class="container">
+        <div class="card">
+            <h5 class="card-title">Order Status</h5>
+        </div>
+        <div class="center">
+            <img src="https://rukminim1.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90" alt="">
+            <h4>Empty</h4>
+            <!-- <button routerLink="/"class="btn btn-primary">Shop Now</button> -->
+        </div>
+    </div>
+</ng-container>

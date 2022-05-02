@@ -1,0 +1,40 @@
+<header>
+    <div class="navbar bg-primary shadow-sm">
+        <div class="navbar-brand align-item-center d-flex">
+            <i style='font-size: "40px";color: "white;"' class="fas fa-shipping-fast">&nbsp;    
+            </i>
+            <strong style='color: "white";font-size: "30px"'>Shopping Kart</strong>
+            <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="searchTerm" (keyup)="serach($event)" placeholder="Search Product"  >
+            </div>
+            <span class="fas fa-search search-icon"></span>
+
+        </div>   
+
+        <div class="button" style="width: fit-content;">
+        
+        <button routerLink="/"class="btn btn-primary" id=>
+            <i style="font-size: 30px;" class="fas fa-home"></i>
+            <div style="font-size: 10px;" class="">Home</div>
+        </button>
+
+        <button routerLink="/cart"class="btn btn-primary">
+            <i style="font-size: 30px;" class="fas fa-cart-plus"></i>
+            <div style="font-size: 10px;" class="badge bg-danger">{{totalItem}}</div>
+            <div style="font-size: 10px;" class="">cart</div>
+        </button>
+
+        <button routerLink="/history" class="btn btn-primary">
+            <i style="font-size: 30px;" class="fas fa fa-history"></i>
+            <div style="font-size: 10px;" class="">Order History</div>
+        </button>
+
+        
+
+        <button routerLink="/history" class="btn btn-primary" (click)="signout()">
+            <i style="font-size: 30px;" class="fa fa-sign-out"></i>
+            <div style="font-size: 10px;" class="">Logout</div>
+        </button>
+        </div>
+    </div>
+</header>

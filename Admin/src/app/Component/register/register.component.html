@@ -1,0 +1,133 @@
+<mat-grid-list cols="2" rowHeight="1:1">
+    <mat-grid-tile>
+      <div *ngIf="gender === 'male'">
+        <img src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png" alt="">
+      </div>
+      <div *ngIf="gender === 'female'">
+        <img src="https://cdn1.iconfinder.com/data/icons/avatars-1-5/136/87-512.png" alt="">
+      </div>
+      <div *ngIf="gender === 'other'">
+        <img src="https://quicklaunch.io/wp-content/uploads/2019/10/user-registration.png" alt="">
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+
+
+<div class="container">
+    <h1 style="text-align: center;color: #195CDD; " class="md-display-1">TCS Registration</h1>
+    <h3 style="text-align: center; margin-top: 20px;color:rgba(114, 115, 115, 0.95);font-size: 30px;font-weight: 300;" >Create Profile</h3>
+
+
+    <form [formGroup]="service.form" class="normal-form">
+
+        <mat-grid-list cols="2" rowHeight="12:3">
+            <mat-grid-tile>
+                <div class="full-width-field">
+                    <input type="hidden" formControlName="$key">
+                    <mat-form-field appearance="standard" style="padding: 20px;width: 70%;" >
+                        <mat-label style="color: #195CDD;">First Name</mat-label>
+                        <input formControlName="FirstName" matInput placeholder="Enter First Name">
+                        <mat-error *ngIf="service.form.controls['FirstName'].errors?.['required']">This field is Mandatory</mat-error> 
+                        <mat-error *ngIf="service.form.controls['FirstName'].errors?.['pattern']">Enter valied Name</mat-error>                       
+                      </mat-form-field>
+                </div>
+            </mat-grid-tile> 
+
+            <mat-grid-tile>
+                <div class="full-width-field" style="width: 100%;">
+                    <mat-form-field appearance="standard" style="padding: 20px;width: 70%; ">
+                        <mat-label align="left" style="color: #195CDD;">Last Name</mat-label>
+                        <input formControlName="LastName" matInput placeholder="Enter Last Name">
+                        <mat-error *ngIf="service.form.controls['LastName'].errors?.['required']">This field is Mandatory</mat-error> 
+                        <mat-error *ngIf="service.form.controls['LastName'].errors?.['pattern']">Enter valied Name</mat-error>                        
+                      </mat-form-field>
+                </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="2" class="full-width-field">
+                <div class="w-100">
+                    <mat-form-field appearance="standard" style="padding-left:20px ;width: 85%;">
+                        <mat-label style="color: #195CDD;">Email</mat-label>
+                        <input formControlName="email" matInput placeholder="pat@example.com">
+                        <mat-icon matSuffix> email</mat-icon>
+                        <mat-error *ngIf="service.form.controls['email'].errors?.['required']">This field is Mandatory</mat-error>
+                        <mat-error *ngIf="service.form.controls['email'].errors?.['email']">Enter Valid Email</mat-error>
+                      </mat-form-field>
+                </div> 
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <div class="full-width-field">
+                    <mat-form-field appearance="standard" style="padding: 20px;">
+                        <!-- <mat-label align="left" style="color: #195CDD;">Phone Number</mat-label> -->
+                        <input  formControlName="mobile" ng2TelInput matInput placeholder="1234567890" (countryChange)="onCountryChange($event)">
+                        <mat-icon matSuffix>phone</mat-icon>
+                        <mat-error *ngIf="service.form.controls['mobile'].errors?.['required']">This field is Mandatory</mat-error>
+                        <mat-error *ngIf="service.form.controls['mobile'].errors?.['pattern']">Only Enter Number</mat-error>
+                        <mat-error *ngIf="service.form.controls['mobile'].errors?.['minlength']">Enter Valid Number</mat-error>
+                        <mat-error *ngIf="service.form.controls['mobile'].errors?.['maxlength']">Enter only 10 Digit</mat-error>                        
+                      </mat-form-field>
+                      <!-- <input type="text" ng2TelInput > -->
+                </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <div class="full-width-field">
+                    <mat-form-field appearance="standard" style="padding: 20px;">
+                        <mat-label style="color: #195CDD;">Date Of Brith</mat-label>
+                        <input formControlName="dob" matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>                        
+                      </mat-form-field>
+                </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="2" class="full-width-field">
+                <div class="w-100">
+                    <mat-label style="color: #195CDD;padding: 20px;">Gender</mat-label>
+                    <mat-radio-group (change)="onChange($event)"formControlName="gender" style="padding:10px;" >
+                        <mat-radio-button value="male" style="padding:10px;">Male</mat-radio-button>
+                        <mat-radio-button value="female" style="padding:10px;">Female</mat-radio-button>
+                        <mat-radio-button value="other" style="padding:10px;">Other</mat-radio-button>
+                      </mat-radio-group>
+                </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="2" class="full-width-field">
+                <div class="w-100">
+                    <mat-form-field appearance="standard" style="padding: 20px;">
+                        <mat-label style="color: #195CDD;">Enter your password</mat-label>
+                        <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="service.form.controls['password'].errors?.['required']">This field is Mandatory</mat-error>
+                        <mat-error *ngIf="service.form.controls['password'].errors?.['pattern']">Enter Valied Patten</mat-error>
+                    </mat-form-field>
+                </div>    
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="2" class="full-width-field">
+                <button style="width: 200px;" mat-raised-button type="submit" color="primary" [disabled]="service.form.invalid" (click)="click()" >Submit</button>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="2" class="full-width-field">
+                <div class="w-100" align="right" style="padding: 20px;">
+                    <a routerLink="/login">Login</a>
+                </div>
+            </mat-grid-tile>
+            
+        </mat-grid-list>
+        
+
+
+        
+    </form>
+    
+</div>
+
+
+  </mat-grid-tile>
+
+
+</mat-grid-list>

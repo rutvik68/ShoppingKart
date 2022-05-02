@@ -1,0 +1,54 @@
+<!-- <p>productdetails works!</p> -->
+<app-header></app-header>
+
+<mat-grid-list cols="2" rowHeight="4:3" class="main">
+    <mat-grid-tile>
+      <div *ngIf="product">
+        <img style="width: 350px;height: 450px;" src="{{product.image}}" alt="">
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+
+
+
+
+<div  *ngIf="product" class="productdetails">
+    <h5 style="margin: 20px;">{{product.ProductName}}</h5>
+    <p style="margin: 20px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 200ch;">{{product.Description}}</p>
+    <p style="margin: 20px;"><strong>Category:   </strong>{{product.category}}</p>
+    <div style="margin: 20px" >
+    <h6 style="display: inline-flex"><strong>Price:   </strong><i style='color:#3961FA;margin-left: 5px;' class='fab fa-ethereum'></i></h6><h5 style="margin-left: 5px;display: inline-flex">{{product.Price}}</h5><br></div>
+    
+    <div *ngIf="food[0]; else out">
+        
+    <strong style="margin: 20px;display: inline-flex;" >Qutenty</strong>
+    <mat-form-field appearance="outline" style="display: inline-flex;" *ngIf="food[0]">
+        <mat-label>Select Qutenty</mat-label>
+        <mat-select (selectionChange)="changequtenty($event.value)" [(value)]="quantity1">
+          <mat-option *ngFor="let food of food" [value]="food">
+            {{food}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      </div>
+      <ng-template #out ><h6 style="color: red;margin-left: 20px;">Out Of stock</h6></ng-template>      
+    <button class="btn btn-primary" (click)="addtocart()" style="display: flex;margin: 20px;" [disabled]="!food[0]">Add to Cart</button>
+</div>
+</mat-grid-tile>
+</mat-grid-list>
+
+<div class="container-fluid">
+    <div class="row">
+        <ng-container *ngFor="let item of filtercategory | filter:searchkey:'ProductName' ">
+            <div class="card col-md-3">
+                <img src="{{item.image}}" alt="">
+                <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.ProductName}}</h5>
+                <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.Description}}</p>
+                <p><strong>Price:  </strong>₹ {{item.Price}}</p>
+                <!-- <button class="btn btn-primary" (click)="addtocart(item)">Add to Cart</button> -->
+                <button class="btn btn-primary" (click)="productdetail(item.id)">Show Details</button>
+            </div>
+        </ng-container>
+    </div>
+</div>
